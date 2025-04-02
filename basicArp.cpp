@@ -23,14 +23,12 @@ Ticker sineTicker;      // Ticker to update the PWM output
 
 // Frequencies for the A major chord (A, C#, E)
 float frequencies[] = {440.0f, 554.37f, 659.25f}; // A, C#, E
-int numNotes = sizeof(frequencies) /
-               sizeof(frequencies[0]); // Number of notes in the chord
-int currentNote = 0;                   // To track the current note being played
+int numNotes = sizeof(frequencies) / sizeof(frequencies[0]); // Number of notes in the chord
+int currentNote = 0; // To track the current note being played
 
 // Function to update the PWM output with sine wave values
 void updatePWM() {
-  speaker.write(sinetable[index] /
-                255.0f);     // Normalize sine value to 0.0 to 1.0
+  speaker.write(sinetable[index] / 255.0f); // Normalize sine value to 0.0 to 1.0
   index = (index + 1) % 128; // Loop through the sine table
 }
 
@@ -48,7 +46,7 @@ int main() {
 
     // Use the potentiometer value to control the speed of the arpeggio
     // Map potValue to a delay range (e.g., 100ms to 1000ms)
-    int delayTime = 100 + (int)(potValue * 900); // Map to 100ms to 1000ms
+    int delayTime = 50 + (int)(potValue * 800); // Map to 100ms to 1000ms
 
     // Loop through the notes of the A major chord to create the arpeggio
     speaker.period(1.0f / frequencies[currentNote]); // Update the PWM frequency
@@ -57,7 +55,6 @@ int main() {
     currentNote = (currentNote + 1) % numNotes; // Cycle through A, C#, E
 
     // Wait before switching to the next note (based on potentiometer input)
-    ThisThread::sleep_for(
-        delayTime); // Delay between notes based on potentiometer value
+    ThisThread::sleep_for(delayTime); // Delay between notes based on potentiometer value
   }
 }
