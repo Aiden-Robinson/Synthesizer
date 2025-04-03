@@ -1,7 +1,6 @@
 #include "DebouncedInterrupt.h"
 #include "mbed.h"
 
-
 // Buzzer (PWM) pin
 PwmOut speaker(PA_5);
 
@@ -30,7 +29,7 @@ volatile int index = 0;
 Ticker sineTicker;
 
 // Frequencies for the notes in the chord
-float frequencies[] = {440.0f, 554.37f, 659.25f, 293.66f, 370.00f};
+float frequencies[] = {293.66f, 370.00f, 440.0f, 554.37f, 659.25f};
 bool noteEnabled[5] = {true, true, true, true,
                        true}; // Track which notes are enabled
 
