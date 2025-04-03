@@ -8,11 +8,18 @@ PwmOut speaker(PA_5);
 AnalogIn pot(PA_4);
 
 // Push buttons for toggling notes
-DebouncedInterrupt button1(PA_3);
-DebouncedInterrupt button2(PC_1);
+DebouncedInterrupt button1(PF_7);
+DebouncedInterrupt button2(PF_9);
 DebouncedInterrupt button3(PC_0);
-DebouncedInterrupt button4(PF_9);
-DebouncedInterrupt button5(PF_7);
+DebouncedInterrupt button4(PC_1);
+DebouncedInterrupt button5(PA_3);
+
+// LEDs corresponding to notes
+DigitalOut led1(PD_9);
+DigitalOut led2(PB_13);
+DigitalOut led3(PB_11);
+DigitalOut led4(PE_15);
+DigitalOut led5(PE_13);
 
 // Sine wave lookup table (128 samples)
 const uint8_t sinetable[128] = {
@@ -60,6 +67,9 @@ int main() {
   // Start PWM sine wave generation
   sineTicker.attach(&updatePWM, 0.025f);
 
+  // LED array corresponding to notes
+  DigitalOut *leds[] = {&led5, &led4, &led3, &led2, &led1};
+
   int currentNote = 0;
   while (true) {
     float potValue = pot.read();
@@ -72,6 +82,11 @@ int main() {
 
     // Set speaker frequency
     speaker.period(1.0f / frequencies[currentNote]);
+
+    // Update LEDs
+    for (int i = 0; i < 5; i++) {
+      *leds[i] = (i == currentNote) ? 1 : 0;
+    }
 
     // Wait before switching notes
     ThisThread::sleep_for(delayTime);
