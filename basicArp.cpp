@@ -4,7 +4,7 @@
 PwmOut speaker(PA_5); // PWM output to speaker
 
 // Potentiometer pin (PA_0)
-AnalogIn pot(PA_0); // Reading the potentiometer value
+AnalogIn pot(PA_4); // Reading the potentiometer value
 
 // Sine wave lookup table (128 samples, values from 0 to 255)
 const uint8_t sinetable[128] = {
@@ -23,12 +23,14 @@ Ticker sineTicker;      // Ticker to update the PWM output
 
 // Frequencies for the A major chord (A, C#, E)
 float frequencies[] = {440.0f, 554.37f, 659.25f}; // A, C#, E
-int numNotes = sizeof(frequencies) / sizeof(frequencies[0]); // Number of notes in the chord
-int currentNote = 0; // To track the current note being played
+int numNotes = sizeof(frequencies) /
+               sizeof(frequencies[0]); // Number of notes in the chord
+int currentNote = 0;                   // To track the current note being played
 
 // Function to update the PWM output with sine wave values
 void updatePWM() {
-  speaker.write(sinetable[index] / 255.0f); // Normalize sine value to 0.0 to 1.0
+  speaker.write(sinetable[index] /
+                255.0f);     // Normalize sine value to 0.0 to 1.0
   index = (index + 1) % 128; // Loop through the sine table
 }
 
@@ -55,6 +57,7 @@ int main() {
     currentNote = (currentNote + 1) % numNotes; // Cycle through A, C#, E
 
     // Wait before switching to the next note (based on potentiometer input)
-    ThisThread::sleep_for(delayTime); // Delay between notes based on potentiometer value
+    ThisThread::sleep_for(
+        delayTime); // Delay between notes based on potentiometer value
   }
 }
