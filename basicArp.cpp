@@ -22,7 +22,7 @@ volatile int index = 0; // Index to iterate through sine table
 Ticker sineTicker;      // Ticker to update the PWM output
 
 // Frequencies for the A major chord (A, C#, E)
-float frequencies[] = {440.0f, 554.37f, 659.25f}; // A, C#, E
+float frequencies[] = {440.0f, 554.37f, 659.25f, 293.66f, 370.00f};
 int numNotes = sizeof(frequencies) /
                sizeof(frequencies[0]); // Number of notes in the chord
 int currentNote = 0;                   // To track the current note being played
