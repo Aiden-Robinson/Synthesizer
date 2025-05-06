@@ -1,2 +1,5 @@
 This embedded system is a microcontroller-based musical arpeggiator that generates audio using PWM to simulate a sine wave and cycles through a set of five musical notes. Each note corresponds to an LED and can be individually toggled on or off using push buttons with hardware debouncing. The speed at which the system cycles through notes is adjustable using a potentiometer, while a second potentiometer controls the modulation speed of the sine wave output (i.e., how fast the PWM waveform updates). The system uses real-time interrupt-driven tasks for button input and PWM updates, requiring components such as a PWM-capable output pin (for audio), analog input pins (for the potentiometers), digital input pins (for the buttons), and digital output pins (for the LEDs). A stable power supply and an audio-capable peripheral like a speaker or buzzer are also necessary.
 
+![image](https://github.com/user-attachments/assets/459b04a2-ec1f-469c-b3a7-012706e5590b)
+
+Link to demo: https://drive.google.com/file/d/1Ukli3BU1nEAzeZbp0H4-edsDiWXlMf_m/view?usp=drive_link
